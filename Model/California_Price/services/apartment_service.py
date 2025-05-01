@@ -39,20 +39,21 @@ class ApartmentService:
         
         apartment_price = self.model.predict(input_df)[0]  
         apartment_price = self.scaler_y.inverse_transform([apartment_price])[0][0]  
+        apartment_price = max(0, apartment_price)
         response = ApartmentResponse(price=float(apartment_price))  # Chuyển sang float
         return response
     
-if __name__ =='__main__':
-    test_request = ApartmentRequest(
-    MedInc=5.2,
-    HouseAge=20,
-    AveRooms=5.8,
-    AveBedrms=1.0,
-    Population=1200,
-    AveOccup=3.0,
-    Latitude=34.15,
-    Longitude=-118.35
-)
-    apt_serv = ApartmentService()
-    res = apt_serv.predict_price(request=test_request)
-    print(res.price)
+# if __name__ =='__main__':
+#     test_request = ApartmentRequest(
+#     MedInc=5.2,
+#     HouseAge=20,
+#     AveRooms=5.8,
+#     AveBedrms=1.0,
+#     Population=1200,
+#     AveOccup=3.0,
+#     Latitude=34.15,
+#     Longitude=-118.35
+# )
+#     apt_serv = ApartmentService()
+#     res = apt_serv.predict_price(request=test_request)
+#     print(res.price)
