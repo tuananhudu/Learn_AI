@@ -4,6 +4,8 @@ from domain.domain import ApartmentRequest, ApartmentResponse
 import joblib
 from tensorflow.keras.models import load_model
 import os
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='sklearn')
 
 class ApartmentService:
     def __init__(self):
@@ -29,20 +31,15 @@ class ApartmentService:
             "Longitude": request.Longitude
         }
         data_df = pd.DataFrame([data_dict])
-        data_df = self.scaler_X.transform(data_df)  # Chuẩn hóa dữ liệu
+        data_df = self.scaler_X.transform(data_df.to_numpy())  # Chuẩn hóa dữ liệu
         return data_df
 
     def predict_price(self, request: ApartmentRequest) -> ApartmentResponse:
         input_df = self.preprocess_input(request)
         
-        # Dự đoán giá
-        apartment_price = self.model.predict(input_df.to_numpy())[0]
-        
-        # Chuẩn hóa ngược giá trị dự đoán
-        apartment_price = self.scaler_y.inverse_transform([apartment_price])[0]
-
-        # Tạo đối tượng response
-        response = ApartmentResponse(price=float(apartment_price))
+        apartment_price = self.model.predict(input_df)[0]  
+        apartment_price = self.scaler_y.inverse_transform([apartment_price])[0][0]  
+        response = ApartmentResponse(price=float(apartment_price))  # Chuyển sang float
         return response
     
 if __name__ =='__main__':
