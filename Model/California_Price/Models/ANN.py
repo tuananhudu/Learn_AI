@@ -2,6 +2,7 @@ from typing import *
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
+from regression_metrics.eval_metrics import RegressionMetrics
 
 class ANN:
     def __init__(
@@ -78,3 +79,15 @@ class ANN:
 
     def predict(self, X):
         return self.model.predict(X)
+    
+    def evaluate_custom_metrics(self, X_test, y_test, inverse_transform=False):
+        y_pred = self.predict(X_test)
+        if inverse_transform and hasattr(self, "y_scaler"):
+            y_pred = self.y_scaler.inverse_transform(y_pred)
+            y_test = np.array(y_test).reshape(y_pred.shape)
+        metrics = RegressionMetrics(y_pred=y_pred, y_true=y_test)
+        result = metrics.mse().mae().rmse().r2_score().summary()
+        print("== Custom Regression Metrics ==")
+        for k, v in result.items():
+            print(f"{k.upper()}: {v:.4f}")
+        return result
