@@ -7,17 +7,18 @@ class Word2VecTrainer:
         self.min_count = min_count 
         self.workers = workers
         self.model = None 
-    def train(self , sentences):
-
-        print("Huan luyen mo hinh word2vec...")
+    
+    def train(self, sentences):
+        print("Huấn luyện mô hình Word2Vec...")
         self.model = Word2Vec(
-            sentences = sentences , 
-            vector_size = self.vector_size,
-            window = self.window ,
-            min_count = self.min_count , 
-            workers = self.workers
-        )
-        print("Hoan tat huan luyen mo hinh ")
+            sentences=sentences,
+            vector_size=self.vector_size,
+            window=self.window,
+            min_count=self.min_count,
+            workers=self.workers
+            )
+        print("Hoàn tất huấn luyện mô hình")
+        return self.model  # Trả về mô hình đã huấn luyện
     
     def get_model(self):
         return self.model 
