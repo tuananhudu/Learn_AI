@@ -1,3 +1,4 @@
+import nltk
 from nltk.corpus import stopwords
 import re
 from gensim.utils import simple_preprocess
@@ -18,7 +19,8 @@ class TextProcessor:
         """
         self.messages = messages
         self.lemmatizer = lemmatizer
-        self.stopwords = stopwords if stopwords is not None else stopwords.words('english')
+        # Sửa lỗi: Sử dụng nltk.corpus.stopwords thay vì stopwords.words
+        self.stopwords = stopwords if stopwords is not None else nltk.corpus.stopwords.words('english')
         self.word2vec_trainer = word2vec_trainer if word2vec_trainer is not None else Word2VecTrainer()
         self.model = self.word2vec_trainer.get_model()
         self.corpus = []
