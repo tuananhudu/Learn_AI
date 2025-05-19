@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1747632486092
+current_stage: None
+description: ''
+last_updated_timestamp: 1747632486092
+name: Titanic-SVC
+run_id: 1a8042fc3cf7416d919bfcdd812e5163
+run_link: ''
+source: mlflow-artifacts:/586820819884441287/1a8042fc3cf7416d919bfcdd812e5163/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/586820819884441287/1a8042fc3cf7416d919bfcdd812e5163/artifacts/model
+user_id: null
+version: 1
