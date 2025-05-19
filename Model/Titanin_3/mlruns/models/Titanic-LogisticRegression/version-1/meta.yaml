@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1747623337016
+current_stage: None
+description: ''
+last_updated_timestamp: 1747623337016
+name: Titanic-LogisticRegression
+run_id: b43aa189a67742e885efd14f640b1f37
+run_link: ''
+source: mlflow-artifacts:/139198463418536674/b43aa189a67742e885efd14f640b1f37/artifacts/model
+status: READY
+status_message: null
+storage_location: mlflow-artifacts:/139198463418536674/b43aa189a67742e885efd14f640b1f37/artifacts/model
+user_id: null
+version: 1
